@@ -1,13 +1,24 @@
 
 data "tfe_ip_ranges" "addresses" {}
 
+data "http" "terraform_cloud_ip" {
+  url = "https://checkip.amazonaws.com/"
+
+  request_headers = {
+    # Enabling the `If-Modified-Since` flag may result in an empty response
+    # If-Modified-Since = "Tue, 26 May 2020 15:10:05 GMT"
+    Accept = "application/json"
+  }
+}
+
+
 module "cluster_infra" {
-  source  = "app.terraform.io/security-framework/eks-security-clusters/aws"
-  version = "0.0.1"
+  source                               = "app.terraform.io/security-framework/eks-security-clusters/aws"
+  version                              = "0.0.1"
   cluster_name                         = "test-cluster"
   vpc_cidr                             = "10.0.0.0/16"
   cluster_endpoint_public_access       = true
-  cluster_endpoint_public_access_cidrs = [for ip in data.tfe_ip_ranges.addresses.api: ip]
+  cluster_endpoint_public_access_cidrs = concat([for ip in data.tfe_ip_ranges.addresses.api : ip], [data.http.terraform_cloud_ip])
   ecr_repos_list                       = ["testrepo"]
   dev_teams = {
     dev_1_team = {
