@@ -7,7 +7,7 @@ module "cluster_infra" {
   cluster_name                         = "test-cluster"
   vpc_cidr                             = "10.0.0.0/16"
   cluster_endpoint_public_access       = true
-  cluster_endpoint_public_access_cidrs = [data.tfe_ip_ranges.addresses.api]
+  cluster_endpoint_public_access_cidrs = [for ip in data.tfe_ip_ranges.addresses.api: ip]
   ecr_repos_list                       = ["testrepo"]
   dev_teams = {
     dev_1_team = {
