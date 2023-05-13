@@ -1,10 +1,13 @@
+
+data "tfe_ip_ranges" "addresses" {}
+
 module "cluster_infra" {
   source  = "app.terraform.io/security-framework/eks-security-clusters/aws"
   version = "0.0.1"
   cluster_name                         = "test-cluster"
   vpc_cidr                             = "10.0.0.0/16"
   cluster_endpoint_public_access       = true
-  cluster_endpoint_public_access_cidrs = ["84.79.52.183/32"]
+  cluster_endpoint_public_access_cidrs = [data.tfe_ip_ranges.addresses.api]
   ecr_repos_list                       = ["testrepo"]
   dev_teams = {
     dev_1_team = {
