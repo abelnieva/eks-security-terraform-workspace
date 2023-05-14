@@ -13,7 +13,7 @@ data "http" "terraform_cloud_ip" {
 
 module "cluster_infra" {
   source                               = "app.terraform.io/security-framework/eks-security-clusters/aws"
-  version                              = "0.0.1"
+  version                              = "0.0.2"
   cluster_name                         = "test-cluster"
   vpc_cidr                             = "10.0.0.0/16"
   cluster_endpoint_public_access       = true
