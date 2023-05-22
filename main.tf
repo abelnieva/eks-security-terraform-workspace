@@ -1,7 +1,7 @@
 
 module "cluster_infra" {
   source                         = "app.terraform.io/security-framework/eks-security-clusters/aws"
-  version                        = "0.0.3"
+  version                        = "0.0.4"
   cluster_name                   = "test-cluster"
   vpc_cidr                       = "10.0.0.0/16"
   cluster_endpoint_public_access = false
