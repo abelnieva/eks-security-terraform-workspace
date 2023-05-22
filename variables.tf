@@ -10,3 +10,9 @@ variable "kubescape_account_id" {
   description = "token to connect kubescape"
 
 }
+variable "tfc_agent_token" {
+  type        = string
+  default     = ""
+  description = "token to connect terraform cloud"
+
+}

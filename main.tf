@@ -1,24 +1,12 @@
 
-data "tfe_ip_ranges" "addresses" {}
-
-data "http" "terraform_cloud_ip" {
-  url = "http://ipv4.icanhazip.com"
-
-  request_headers = {
-    Accept = "text/html"
-  }
-  
-}
-
-
 module "cluster_infra" {
-  source                               = "app.terraform.io/security-framework/eks-security-clusters/aws"
-  version                              = "0.0.2"
-  cluster_name                         = "test-cluster"
-  vpc_cidr                             = "10.0.0.0/16"
-  cluster_endpoint_public_access       = true
-  #cluster_endpoint_public_access_cidrs = ["${trim(data.http.terraform_cloud_ip.body,"\n")}/32"]
-  ecr_repos_list                       = ["testrepo"]
+  source                         = "app.terraform.io/security-framework/eks-security-clusters/aws"
+  version                        = "0.0.3"
+  cluster_name                   = "test-cluster"
+  vpc_cidr                       = "10.0.0.0/16"
+  cluster_endpoint_public_access = false
+  tfc_agent_token                = var.tfc_agent_token
+  ecr_repos_list                 = ["testrepo"]
   dev_teams = {
     dev_1_team = {
       users = ["arn:aws:iam::481020473208:user/terraform"] #arns
@@ -30,7 +18,7 @@ module "cluster_infra" {
       }
     }
   }
-  kubescape_account_id = var.kubescape_account_id //sensible
+  kubescape_account_id = var.kubescape_account_id
   repo_apps_url        = "git@github.com:abelnieva/eks-security-framework-apps.git"
   repo_apps_path       = "./"
   dns_zones            = []
@@ -54,4 +42,4 @@ module "cluster_infra" {
       }
     }
   }
-} 
+}
