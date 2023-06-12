@@ -21,7 +21,7 @@ module "cluster_infra" {
     }
   }
   kubescape_account_id = var.kubescape_account_id
-  repo_apps_url        = "git@github.com:abelnieva/eks-security-framework-apps.git"
+  repo_apps_url        = "https://github.com/abelnieva/eks-security-framework-apps.git"
   repo_apps_path       = "./"
   dns_zones            = []
   managed_node_groups = {
@@ -29,7 +29,7 @@ module "cluster_infra" {
       min_size = 1
 
       max_size           = 10
-      desired_size       = 3
+      desired_size       = 4
       launch_template_os = "bottlerocket"
       ami_type           = "BOTTLEROCKET_x86_64"
       instance_types     = ["t3.large"]
