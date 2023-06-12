@@ -4,7 +4,7 @@ module "cluster_infra" {
   version                        = "0.0.7"
   cluster_name                   = "test-cluster"
   vpc_cidr                       = "10.0.0.0/16"
-  vpc_endpoints_list             = []
+  vpc_endpoints_list             = ["autoscaling", "ecr.api", "ecr.dkr", "ec2"]
   cluster_endpoint_public_access = false
   tfc_agent_token                = var.tfc_agent_token
   ecr_repos_list                 = ["testrepo"]
