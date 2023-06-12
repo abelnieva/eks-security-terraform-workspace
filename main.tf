@@ -32,7 +32,7 @@ module "cluster_infra" {
       desired_size       = 4
       launch_template_os = "bottlerocket"
       ami_type           = "BOTTLEROCKET_x86_64"
-      instance_types     = ["t3.large"]
+      instance_types     = ["t3.xlarge"]
       capacity_type      = "SPOT"
 
       update_config = {
