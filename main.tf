@@ -1,6 +1,6 @@
 
 module "cluster_infra" {
-  source                         = "app.terraform.io/security-framework/eks-security-clusters/aws"
+  source                         = "abelnieva/eks-security-clusters/aws"
   version                        = "0.0.10"
   cluster_name                   = "test-cluster"
   vpc_cidr                       = "10.0.0.0/16"
@@ -22,7 +22,7 @@ module "cluster_infra" {
   }
   kubescape_account_id = var.kubescape_account_id
   repo_apps_url        = "https://github.com/abelnieva/eks-security-framework-apps.git"
-  repo_apps_path       = "./"
+  repo_apps_path       = "teams/dev_1_team/dev"
   dns_zones            = []
   managed_node_groups = {
     node_group_a = {
@@ -32,7 +32,7 @@ module "cluster_infra" {
       desired_size       = 4
       launch_template_os = "bottlerocket"
       ami_type           = "BOTTLEROCKET_x86_64"
-      instance_types     = ["t3.large"]
+      instance_types     = ["t3.xlarge"]
       capacity_type      = "SPOT"
 
       update_config = {
