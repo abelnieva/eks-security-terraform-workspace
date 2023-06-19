@@ -9,7 +9,9 @@ on:
       - '**.tf'
       - '**.yml'
       - '**.yaml'
-
+env:
+  TF_DOCS_VERSION: v0.16.0
+  TFLINT_VERSION: v0.41.0
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
